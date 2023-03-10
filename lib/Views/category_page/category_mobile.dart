@@ -15,11 +15,12 @@ class CategoryMobile extends StatelessWidget {
       backgroundColor: AppColors.appBackground,
       body: SingleChildScrollView(
         child: SafeArea(
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CategoryComponent.CustomAppBAr(title: title),
             Padding(
-              padding:  EdgeInsets.only(left: 16.w,top: 24.h),
+              padding: EdgeInsets.only(left: 16.w, top: 24.h),
               child: Text(
                 "MOST POPULAR SEARCHES",
                 style: TextStyle(
@@ -29,43 +30,44 @@ class CategoryMobile extends StatelessWidget {
                     color: AppColors.textgreyColor),
               ),
             ),
-            SizedBox(height: 16.h,),
+            SizedBox(
+              height: 16.h,
+            ),
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 16.w),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: SizedBox(
                 width: 343.w,
                 height: 400.h,
                 child: ListView.builder(
-                  itemCount: 4,
-                  itemBuilder: (context,index){
-                    return Padding(
-                      padding:  EdgeInsets.only(bottom: 16.h),
-                      child: InkWell(
-                        onTap: () {
-                          Get.to(()=>SearchResult(image: "", title: title));
-                        },
-                        child: Container(
-                          height: 48.h,
-                          width: 343.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: AppColors.containerBgColor
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Text(
-                                        "Most popular search result 1",
-                                        style: TextStyle(
-                                            fontSize: 18.sp,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: 'Poppins',
-                                            color: AppColors.textwhiteColor),
-                                      ),
+                    itemCount: 4,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(bottom: 16.h),
+                        child: InkWell(
+                          onTap: () {
+                            Get.to(() => SearchResult(image: "", title: title));
+                          },
+                          child: Container(
+                            height: 48.h,
+                            width: 343.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: AppColors.containerBgColor),
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Most popular search result 1",
+                                style: TextStyle(
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Poppins',
+                                    color: AppColors.textwhiteColor),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                }),
+                      );
+                    }),
               ),
             )
           ],
