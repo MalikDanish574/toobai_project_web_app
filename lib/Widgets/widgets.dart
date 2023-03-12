@@ -1,126 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:toobai_project_web_app/Views/category_page/category.dart';
+import 'package:toobai_project_web_app/Views/delivery/delivery.dart';
 import 'package:toobai_project_web_app/Views/download/DownloadWeb.dart';
 
 import '../Utils/Colors/colors.dart';
 import '../Utils/image_in_App/images.dart';
 
 class WidgetsAll {
-  static Widget CustomtopNavigationBAr() {
-    return Container(
-      color: AppColors.appBarBgColor,
-      height: 82.h,
-      width: 1440.w,
-      child: Row(
-        children: [
-          SizedBox(
-            width: 200.w,
-          ),
-          RichText(
-              text: TextSpan(children: <TextSpan>[
-            TextSpan(
-              text: "Toobi",
-              style: TextStyle(
-                  color: AppColors.textwhiteColor,
-                  fontSize: 30.sp,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: Assets.poppinsRegular),
-            ),
-            TextSpan(
-              text: "AI",
-              style: TextStyle(
-                  color: AppColors.textblueColor,
-                  fontSize: 30.sp,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: Assets.poppinsRegular),
-            )
-          ])),
-          SizedBox(
-            width: 200.w,
-          ),
-          Text(
-            "home",
-            style: TextStyle(
-                color: AppColors.textblueColor,
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w500,
-                fontFamily: Assets.poppinsRegular),
-          ),
-          SizedBox(
-            width: 48.w,
-          ),
-          Text(
-            "Anime",
-            style: TextStyle(
-                color: AppColors.textwhiteColor,
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w500,
-                fontFamily: Assets.poppinsRegular),
-          ),
-          SizedBox(
-            width: 48.w,
-          ),
-          Text(
-            "Movies",
-            style: TextStyle(
-                color: AppColors.textwhiteColor,
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w500,
-                fontFamily: Assets.poppinsRegular),
-          ),
-          SizedBox(
-            width: 48.w,
-          ),
-          Text(
-            "Books",
-            style: TextStyle(
-                color: AppColors.textwhiteColor,
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w500,
-                fontFamily: Assets.poppinsRegular),
-          ),
-          SizedBox(
-            width: 48.w,
-          ),
-          Text(
-            "Shopping Products",
-            style: TextStyle(
-                color: AppColors.textwhiteColor,
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w500,
-                fontFamily: Assets.poppinsRegular),
-          ),
-          SizedBox(
-            width: 30.w,
-          ),
-          InkWell(
-            onTap: () {
-              Get.to(() => DownloadWeb());
-            },
-            child: Container(
-              height: 50.h,
-              width: 159.w,
-              decoration: BoxDecoration(
-                  color: AppColors.containerbgblueColor,
-                  borderRadius: BorderRadius.circular(15.r)),
-              child: Center(
-                child: Text(
-                  "Download App",
-                  style: TextStyle(
-                      color: AppColors.textBlackColor,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: Assets.poppinsRegular),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   static Widget footer() {
     return Container(
         height: 389.h,
@@ -608,9 +498,9 @@ class WidgetsAll {
         width: 375.w,
         color: AppColors.appBarBgColor,
         child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 16.w),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SizedBox(
               height: 64.h,
             ),
@@ -863,10 +753,228 @@ class WidgetsAll {
                         ]),
                       ))
                 ])),
-                 SizedBox(
+            SizedBox(
               height: 64.h,
             ),
           ]),
         ));
+  }
+}
+
+class CustomAppbar extends StatefulWidget {
+  @override
+  State<CustomAppbar> createState() => _CustomAppbarState();
+}
+
+class _CustomAppbarState extends State<CustomAppbar> {
+  bool texthome = false;
+
+  bool textAnime = false;
+
+  bool textMovies = false;
+
+  bool textBooks = false;
+
+  bool textShopping = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: AppColors.appBarBgColor,
+      height: 82.h,
+      width: 1440.w,
+      child: Row(
+        children: [
+          SizedBox(
+            width: 200.w,
+          ),
+          RichText(
+              text: TextSpan(children: <TextSpan>[
+            TextSpan(
+              text: "Toobi",
+              style: TextStyle(
+                  color: AppColors.textwhiteColor,
+                  fontSize: 30.sp,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: Assets.poppinsRegular),
+            ),
+            TextSpan(
+              text: "AI",
+              style: TextStyle(
+                  color: AppColors.textblueColor,
+                  fontSize: 30.sp,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: Assets.poppinsRegular),
+            )
+          ])),
+          SizedBox(
+            width: 200.w,
+          ),
+          InkWell(
+            onTap: () {
+              Get.to(Delivery());
+              setState(() {
+                texthome = true;
+                textAnime = false;
+                textBooks = false;
+                textMovies = false;
+                textShopping = false;
+              });
+            },
+            child: Text(
+              "home",
+              style: TextStyle(
+                  color: texthome
+                      ? AppColors.textblueColor
+                      : AppColors.textwhiteColor,
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: Assets.poppinsRegular),
+            ),
+          ),
+          SizedBox(
+            width: 48.w,
+          ),
+          InkWell(
+            onTap: () {
+              texthome = false;
+              textAnime = true;
+              textBooks = false;
+              textMovies = false;
+              textShopping = false;
+              Get.to(Categories(
+                image: Assets.animeBackground,
+                title: "Anime",
+              ));
+              setState(() {});
+            },
+            child: Text(
+              "Anime",
+              style: TextStyle(
+                  color: textAnime
+                      ? AppColors.textblueColor
+                      : AppColors.textwhiteColor,
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: Assets.poppinsRegular),
+            ),
+          ),
+          SizedBox(
+            width: 48.w,
+          ),
+          InkWell(
+            onTap: () {
+              Get.to(Categories(
+                image: Assets.moviesBackground,
+                title: "Movies",
+              ));
+              setState(() {
+                texthome = false;
+                textAnime = false;
+                textBooks = false;
+                textMovies = true;
+                textShopping = false;
+              });
+            },
+            child: Text(
+              "Movies",
+              style: TextStyle(
+                  color: textMovies
+                      ? AppColors.textblueColor
+                      : AppColors.textwhiteColor,
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: Assets.poppinsRegular),
+            ),
+          ),
+          SizedBox(
+            width: 48.w,
+          ),
+          InkWell(
+            onTap: () {
+              texthome = false;
+              textAnime = false;
+              textBooks = true;
+              textMovies = false;
+              textShopping = false;
+              Get.to(Categories(
+                image: Assets.booksBackground,
+                title: "Books",
+              ));
+              setState(() {
+                texthome = false;
+                textAnime = false;
+                textBooks = false;
+                textMovies = true;
+                textShopping = false;
+              });
+            },
+            child: Text(
+              "Books",
+              style: TextStyle(
+                  color: textBooks
+                      ? AppColors.textblueColor
+                      : AppColors.textwhiteColor,
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: Assets.poppinsRegular),
+            ),
+          ),
+          SizedBox(
+            width: 48.w,
+          ),
+          InkWell(
+            onTap: () {
+              Get.to(Categories(
+                image: Assets.shoppingBackground,
+                title: "Shopping Prodduct",
+              ));
+              setState(() {
+                texthome = false;
+                textAnime = false;
+                textBooks = false;
+                textMovies = false;
+                textShopping = true;
+              });
+            },
+            child: Text(
+              "Shopping Products",
+              style: TextStyle(
+                  color: textShopping
+                      ? AppColors.textblueColor
+                      : AppColors.textwhiteColor,
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: Assets.poppinsRegular),
+            ),
+          ),
+          SizedBox(
+            width: 30.w,
+          ),
+          InkWell(
+            onTap: () {
+              Get.to(() => DownloadWeb());
+            },
+            child: Container(
+              height: 50.h,
+              width: 159.w,
+              decoration: BoxDecoration(
+                  color: AppColors.containerbgblueColor,
+                  borderRadius: BorderRadius.circular(15.r)),
+              child: Center(
+                child: Text(
+                  "Download App",
+                  style: TextStyle(
+                      color: AppColors.textBlackColor,
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: Assets.poppinsRegular),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
